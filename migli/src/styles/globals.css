@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   MIGLI · Design System Foundation
+   ============================================ */
+
+@layer base {
+  :root {
+    --ink-950: #060d1a;
+    --ink-900: #081120;
+    --ink-800: #0a1628;
+    --ink-700: #0f1f3d;
+    --aqua-400: #00c2ff;
+    --aqua-300: #38bdf8;
+    --aqua-200: #7dd3fc;
+    --glass-border: rgba(0, 194, 255, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--ink-950);
+  }
+
+  body {
+    background: var(--ink-950);
+    color: white;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Hide native cursor on desktop — custom cursor in <CustomCursor /> */
+  @media (hover: hover) and (pointer: fine) {
+    body,
+    a,
+    button {
+      cursor: none;
+    }
+  }
+
+  /* Scrollbar — premium aqua thin */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--ink-900);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00c2ff 0%, #38bdf8 100%);
+    border-radius: 100px;
+  }
+
+  ::selection {
+    background: rgba(0, 194, 255, 0.3);
+    color: white;
+  }
+}
+
+/* ============================================
+   Utility Components
+   ============================================ */
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #ffffff 0%, #00c2ff 100%);
+  }
+
+  .gradient-text-aqua {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #00c2ff 0%, #7dd3fc 100%);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-aqua {
+    background: rgba(0, 194, 255, 0.07);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  .btn-primary {
+    @apply font-display font-bold tracking-wider2 rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, #00c2ff 0%, #38bdf8 100%);
+    color: #060d1a;
+    box-shadow: 0 0 40px rgba(0, 194, 255, 0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 60px rgba(0, 194, 255, 0.45);
+  }
+
+  .btn-secondary {
+    @apply font-display font-semibold tracking-wider2 rounded-full transition-all duration-300;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .btn-secondary:hover {
+    border-color: #00c2ff;
+    color: #00c2ff;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest2 text-aqua-400;
+  }
+
+  /* Animated grid lines */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0, 194, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 194, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  }
+
+  /* Noise / film grain overlay */
+  .noise::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .bg-orb {
+    @apply absolute rounded-full pointer-events-none;
+    filter: blur(80px);
+  }
+
+  /* Use the dynamic viewport unit when available for mobile capture screens
+     (avoids Safari's collapsing URL bar pushing controls off-screen). */
+  .h-dscreen {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  /* Tabular numerals for timers/counters */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .perspective {
+    perspective: 1200px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
