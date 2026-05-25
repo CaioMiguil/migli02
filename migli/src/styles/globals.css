@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   MIGLI · Design System v3
+   Off-white + Ocean blue · Mobile-first
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Surface tokens */
+    --paper-0: #FAFBFD;
+    --paper-50: #FFFFFF;
+    --paper-100: #F4F7FB;
+    --paper-200: #E8EEF5;
+    --paper-300: #D6DEE8;
+
+    /* Text tokens */
+    --ink-900: #0B1320;
+    --ink-700: #2C374B;
+    --ink-500: #6B7280;
+    --ink-400: #9CA3AF;
+
+    /* Ocean brand */
+    --ocean-100: #DCEFFA;
+    --ocean-300: #7BC5E8;
+    --ocean-500: #0E8AC4;
+    --ocean-600: #0871A6;
+    --ocean-700: #0A5C83;
+    --ocean-900: #0A1E2F;
+
+    /* Glass — sutil sobre superfícies claras */
+    --glass-border: rgba(14, 138, 196, 0.16);
+    --glass-tint: rgba(255, 255, 255, 0.72);
+
+    /* Safe-area aliases */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: var(--paper-0);
+  }
+
+  body {
+    background: var(--paper-0);
+    color: var(--ink-900);
+    font-family: 'Montserrat', system-ui, sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    letter-spacing: -0.025em;
+    color: var(--ink-900);
+    font-weight: 700;
+  }
+
+  p { line-height: 1.65; color: var(--ink-700); }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(11, 19, 32, 0.18);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(11, 19, 32, 0.32);
+  }
+
+  ::selection {
+    background: rgba(14, 138, 196, 0.20);
+    color: var(--ink-900);
+  }
+}
+
+@layer components {
+  /* Gradientes brand */
+  .gradient-text-ocean {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0A5C83 0%, #0E8AC4 60%, #3FA8DA 100%);
+  }
+
+  .gradient-text-deep {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #0B1320 0%, #0E8AC4 100%);
+  }
+
+  /* Glass — superfície leve sobre paper-100 */
+  .glass-light {
+    background: var(--glass-tint);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--paper-200);
+  }
+
+  /* Glass ocean — chips & badges com tom de marca */
+  .glass-ocean {
+    background: rgba(220, 239, 250, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* ============================================================
+     LEGACY DARK UTILITIES — usadas por overlays sobre fundo escuro
+     (camera, viewer, scan, immersive). NÃO use em superfícies light.
+     ============================================================ */
+
+  .glass-aqua {
+    background: rgba(0, 194, 255, 0.07);
+    border: 1px solid rgba(0, 194, 255, 0.20);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #00C2FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-text-aqua {
+    background: linear-gradient(135deg, #00C2FF 0%, #7DD3FC 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .noise {
+    position: relative;
+  }
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    z-index: 1;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0, 194, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 194, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Botão primário — ocean */
+  .btn-primary {
+    @apply font-display font-semibold tracking-normal2 rounded-full transition-all duration-300;
+    background: linear-gradient(135deg, #0E8AC4 0%, #0871A6 100%);
+    color: #FFFFFF;
+    box-shadow: 0 8px 24px rgba(14, 138, 196, 0.22);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 40px rgba(14, 138, 196, 0.32);
+  }
+  .btn-primary:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  /* Botão secundário — outline em paper */
+  .btn-secondary {
+    @apply font-display font-medium tracking-normal2 rounded-full transition-all duration-300;
+    background: var(--paper-50);
+    color: var(--ink-700);
+    border: 1px solid var(--paper-300);
+  }
+  .btn-secondary:hover {
+    border-color: var(--ocean-500);
+    color: var(--ocean-700);
+    background: var(--paper-100);
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    @apply text-[10px] font-semibold uppercase tracking-widest3;
+    color: var(--ocean-600);
+  }
+
+  /* Section label */
+  .section-label {
+    @apply text-[11px] font-semibold uppercase tracking-widest3;
+    color: var(--ocean-600);
+  }
+
+  /* Card padrão */
+  .card {
+    @apply rounded-3xl border border-paper-200 bg-paper-50;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+  }
+
+  /* Wave background — gradient liquid ocean */
+  .bg-wave {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(220, 239, 250, 0.85), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 50%, rgba(179, 222, 243, 0.4), transparent 60%),
+      var(--paper-0);
+  }
+
+  /* Subtle dotted texture — substitui noise grain */
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(14, 138, 196, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Dynamic viewport (mobile capture screens) */
+  .h-dscreen {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+
+  /* App shell tab bar - safe-area aware */
+  .tab-bar {
+    background: var(--paper-50);
+    border-top: 1px solid var(--paper-200);
+    box-shadow: 0 -2px 16px rgba(15, 23, 42, 0.06);
+    padding-bottom: max(var(--safe-bottom), 8px);
+  }
+
+  /* Status pills */
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium;
+  }
+  .pill-ocean {
+    background: var(--ocean-100);
+    color: var(--ocean-700);
+  }
+  .pill-soft {
+    background: var(--paper-100);
+    color: var(--ink-700);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .perspective { perspective: 1200px; }
+  .preserve-3d { transform-style: preserve-3d; }
+  .pt-safe { padding-top: max(var(--safe-top), 12px); }
+  .pb-safe { padding-bottom: max(var(--safe-bottom), 12px); }
+}
